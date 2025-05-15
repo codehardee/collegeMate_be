@@ -16,7 +16,7 @@ import environ
 env = environ.Env()
 environ.Env.read_env()
 
-
+import dj_database_url
 
 from datetime import timedelta
 
@@ -110,17 +110,24 @@ WSGI_APPLICATION = 'college_mate.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#          'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'college_mate_db',  # The name of your database
+#         'USER': 'college_user',     # The username you created
+#         'PASSWORD': 'Hardee@2611', # The password for the user
+#         'HOST': 'localhost',        # The database host (usually localhost for local development)
+#         'PORT': '5432', # default PostgreSQL port
+#     }
+# }
 DATABASES = {
-    'default': {
-         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'college_mate_db',  # The name of your database
-        'USER': 'college_user',     # The username you created
-        'PASSWORD': 'Hardee@2611', # The password for the user
-        'HOST': 'localhost',        # The database host (usually localhost for local development)
-        'PORT': '5432', # default PostgreSQL port
-    }
+    'default': dj_database_url.config(
+        # default=env('DATABASE_URL'),
+        default= 'postgresql://college_mate_db_user:KW5lKGZa0QM8xmXmmgEBews15XPzy8ao@dpg-d0ikl8adbo4c738k4j60-a.oregon-postgres.render.com/college_mate_db',
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
