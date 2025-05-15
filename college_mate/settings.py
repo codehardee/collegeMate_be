@@ -205,7 +205,7 @@ SIMPLE_JWT = {
 
 }
 CORS_ALLOWED_ORIGINS = [
-    'https://college-mate.vercel.app',
+    'https://college-mate-fe.vercel.app/',
     'http://localhost:5173',
 ]
 
