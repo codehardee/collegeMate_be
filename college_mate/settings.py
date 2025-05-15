@@ -205,6 +205,7 @@ SIMPLE_JWT = {
 
 }
 CORS_ALLOWED_ORIGINS = [
+    'https://vercel.com/hardees-projects/college-mate',
     'http://localhost:5173',
 ]
 
