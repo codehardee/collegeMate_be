@@ -1,7 +1,7 @@
 from rest_framework import viewsets, status
 from .serializers import StudentProfileSetUpSerializer
 from .models import StudentProfileSetUp
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 
@@ -19,7 +19,12 @@ def get_my_profile(request):
 class StudentProfileSetUpViewSet(viewsets.ModelViewSet):
     queryset = StudentProfileSetUp.objects.all()
     serializer_class = StudentProfileSetUpSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return [AllowAny()]
+        return [IsAuthenticated()]
 
     def perform_create(self, serializer):
         # Assign the authenticated user to the student profile
