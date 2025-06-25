@@ -11,15 +11,11 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 class ProjectViewSet(viewsets.ModelViewSet):
     authentication_classes = [JWTAuthentication]
-    queryset = uploadProject.objects.filter(deleted=False)
+    # queryset = uploadProject.objects.filter(deleted=False)
     serializer_class = uploadProjectSerializer
     # permission_classes = [IsAuthenticated]
 
     def get_permissions(self):
-        if self.request.method in ['GET']:
-            return [AllowAny()]  # ✅ should be a class instance, this is actually fine, but not the issue
-
-        # But this might fail due to side-effects. So instead use the preferred style:
         if self.request.method in ['GET']:
             permission_classes = [AllowAny]
         else:
@@ -31,9 +27,6 @@ class ProjectViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(student=self.request.user)
-        return Response({
-            "status":"You have successfully listed the project."
-        }, status=status.HTTP_200_OK)
 
     def perform_update(self, serializer):
         instance = serializer.save()
