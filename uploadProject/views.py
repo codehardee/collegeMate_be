@@ -17,8 +17,14 @@ class ProjectViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         if self.request.method in ['GET']:
-            return [AllowAny()]
-        return [IsAuthenticated()]
+            return [AllowAny()]  # ✅ should be a class instance, this is actually fine, but not the issue
+
+        # But this might fail due to side-effects. So instead use the preferred style:
+        if self.request.method in ['GET']:
+            permission_classes = [AllowAny]
+        else:
+            permission_classes = [IsAuthenticated]
+        return [permission() for permission in permission_classes]
 
     def get_queryset(self):
         return uploadProject.objects.filter(deleted=False)
