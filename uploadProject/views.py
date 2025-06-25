@@ -11,7 +11,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 class ProjectViewSet(viewsets.ModelViewSet):
     authentication_classes = [JWTAuthentication]
-    # queryset = uploadProject.objects.filter(deleted=False)
+    queryset = uploadProject.objects.filter(deleted=False)
     serializer_class = uploadProjectSerializer
     # permission_classes = [IsAuthenticated]
 
