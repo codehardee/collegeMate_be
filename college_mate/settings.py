@@ -124,7 +124,7 @@ WSGI_APPLICATION = 'college_mate.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         # default=env('DATABASE_URL'),
-        default= 'postgresql://college_mate_db_user:KW5lKGZa0QM8xmXmmgEBews15XPzy8ao@dpg-d0ikl8adbo4c738k4j60-a.oregon-postgres.render.com/college_mate_db',
+        default= 'postgresql://college_mate_db_nmqv_user:yXjkOV0EM1O8ODWCDAlRBAvTJmJ1RWBa@dpg-d1e1e2idbo4c73eeav3g-a.oregon-postgres.render.com/college_mate_db_nmqv?sslmode=require',
         conn_max_age=600,
         ssl_require=True
     )
